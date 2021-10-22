@@ -1,1 +1,1 @@
-web: gunicorn -w 3 -k hypercorn app:main
+web: gunicorn -w 3 -k hypercorn main:app
