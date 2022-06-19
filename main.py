@@ -7,7 +7,7 @@ import io
 
 app = FastAPI(docs_url="/",title="Embodier",
     description="It generates the unique avatar, which save image into PNG, JPG, or Base64 string. you can use this package to give avatar to newly registered users on your application.",
-    version="1.0.6",
+    version="1.0.9",
     terms_of_service="https://github.com/2000prath/embodier/",
     contact={
         "name": "Prathamesh Patkar",
@@ -17,7 +17,6 @@ app = FastAPI(docs_url="/",title="Embodier",
     license_info={
         "name": "MIT License (MIT)"
     })
-obj = embodier.AvatarGenerator()
 
 @app.get("/api/BlockAvatar",response_class=HTMLResponse)
 async def blockAvatar(background_color:Optional[str] = None,border:Optional[str]=None,border_width: Optional[int] = None,boxes: Optional[int] = None,pixels: Optional[int] = None,download:Optional[str]=None,base64:Optional[str]=None):
@@ -68,7 +67,7 @@ async def TextAvatar(background_color:Optional[str] = None,text:Optional[str]=No
     if text:
         text_ = text
     else:
-        return "{'error':'Cannot create image without text','solution':'Please provide text in query string e.g: ?text=PE'}"
+        return "{'success':False, 'message':'Cannot create avatar without text, Please fill the text field. E.g: text=PE', data:[]}"
     
     
     img = obj.TextAvatar(text=text_,background_color=background_color_) 
